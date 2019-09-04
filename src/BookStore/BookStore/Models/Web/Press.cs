@@ -1,4 +1,6 @@
-﻿namespace BookStore.Models
+﻿using System.Collections.Generic;
+
+namespace BookStore.Models.Web
 {
     public class Press
     {
@@ -7,6 +9,6 @@
         public string Email { get; set; }
         public Category Category { get; set; }
 
-        public string DynamicProperties { get; set; }
+        public IDictionary<string, object> DynamicProperties { get; set; }
     }
 }

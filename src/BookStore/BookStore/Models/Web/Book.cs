@@ -1,4 +1,6 @@
-﻿namespace BookStore.Models
+﻿using System.Collections.Generic;
+
+namespace BookStore.Models.Web
 {
     public class Book
     {
@@ -10,6 +12,6 @@
         public Address Location { get; set; }
         public Press Press { get; set; }
 
-        public string DynamicProperties { get; set; }
+        public IDictionary<string, object> DynamicProperties { get; set; }
     }
 }

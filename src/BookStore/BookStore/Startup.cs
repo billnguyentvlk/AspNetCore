@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BookStore.Models;
+﻿using BookStore.Models;
+using BookStore.Models.Web;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OData.Edm;
+using Book = BookStore.Models.Web.Book;
+using Press = BookStore.Models.Web.Press;
 
 namespace BookStore
 {
@@ -51,9 +48,10 @@ namespace BookStore
 
         private static IEdmModel GetEdmModel()
         {
-            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Book>("Books");
             builder.EntitySet<Press>("Presses");
+            builder.ComplexType<OpenComplexType>();
             return builder.GetEdmModel();
         }
     }

@@ -1,0 +1,47 @@
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:DataServices>
+		<Schema Namespace="BookStore.Models.Web" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<EntityType Name="Book" OpenType="true">
+				<Key>
+					<PropertyRef Name="Id"/>
+				</Key>
+				<Property Name="Id" Nullable="false" Type="Edm.Int32"/>
+				<Property Name="ISBN" Type="Edm.String"/>
+				<Property Name="Title" Type="Edm.String"/>
+				<Property Name="Author" Type="Edm.String"/>
+				<Property Name="Price" Nullable="false" Type="Edm.Decimal"/>
+				<Property Name="Location" Type="BookStore.Models.Web.Address"/>
+				<NavigationProperty Name="Press" Type="BookStore.Models.Web.Press"/>
+			</EntityType>
+			<EntityType Name="Press" OpenType="true">
+				<Key>
+					<PropertyRef Name="Id"/>
+				</Key>
+				<Property Name="Id" Nullable="false" Type="Edm.Int32"/>
+				<Property Name="Name" Type="Edm.String"/>
+				<Property Name="Email" Type="Edm.String"/>
+				<Property Name="Category" Nullable="false" Type="BookStore.Models.Category"/>
+			</EntityType>
+			<ComplexType Name="OpenComplexType" OpenType="true"/>
+			<ComplexType Name="Address" OpenType="true">
+				<Property Name="City" Type="Edm.String"/>
+				<Property Name="Street" Type="Edm.String"/>
+			</ComplexType>
+		</Schema>
+		<Schema Namespace="BookStore.Models" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<EnumType Name="Category">
+				<Member Name="Book" Value="0"/>
+				<Member Name="Magazine" Value="1"/>
+				<Member Name="EBook" Value="2"/>
+			</EnumType>
+		</Schema>
+		<Schema Namespace="Default" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<EntityContainer Name="Container">
+				<EntitySet EntityType="BookStore.Models.Web.Book" Name="Books">
+					<NavigationPropertyBinding Path="Press" Target="Presses"/>
+				</EntitySet>
+				<EntitySet EntityType="BookStore.Models.Web.Press" Name="Presses"/>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
